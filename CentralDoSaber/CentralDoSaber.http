@@ -1,0 +1,6 @@
+@CentralDoSaber_HostAddress = http://localhost:5058
+
+GET {{CentralDoSaber_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

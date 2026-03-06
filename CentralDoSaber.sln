@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentralDoSaber", "CentralDoSaber\CentralDoSaber.csproj", "{91099369-6A0D-4A08-8874-B5772D326829}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentralDoSaber.Domain", "CentralDoSaber.Domain\CentralDoSaber.Domain.csproj", "{E6755712-1553-42F2-8509-DB939AD4D5AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91099369-6A0D-4A08-8874-B5772D326829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91099369-6A0D-4A08-8874-B5772D326829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91099369-6A0D-4A08-8874-B5772D326829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91099369-6A0D-4A08-8874-B5772D326829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6755712-1553-42F2-8509-DB939AD4D5AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6755712-1553-42F2-8509-DB939AD4D5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6755712-1553-42F2-8509-DB939AD4D5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6755712-1553-42F2-8509-DB939AD4D5AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
