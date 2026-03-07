@@ -53,8 +53,6 @@ public class Conteudo : BaseEntity
                 break;
 
             case MediaType.Outros:
-                if (numeroPaginas <= 0)
-                    throw new Exception("Conteúdos devem ter uma quantidade de páginas maior que zero.");
                 break;
 
             default:
@@ -67,10 +65,10 @@ public class Conteudo : BaseEntity
 
     private void ValidarPaginasECapitulos(int? numeroPaginas, int? numeroCapitulos, string tipo)
     {
-        if (numeroPaginas <= 0)
+        if (!numeroPaginas.HasValue || numeroPaginas <= 0)
             throw new Exception($"{tipo}s devem ter uma quantidade de páginas maior que zero.");
 
-        if (numeroCapitulos <= 0)
+        if (!numeroCapitulos.HasValue || numeroCapitulos <= 0)
             throw new Exception($"{tipo}s devem ter ao menos um capítulo.");
     }
     

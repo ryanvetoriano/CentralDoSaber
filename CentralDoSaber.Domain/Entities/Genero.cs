@@ -14,6 +14,9 @@ public class Genero : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(nome))
             throw new Exception("Nome do gênero não pode ser vazio.");
+        
+        if (string.IsNullOrWhiteSpace(descricao))
+            throw new Exception("Descrição do gênero não pode ser vazia.");
 
         Nome = nome;
         Descricao = descricao;
