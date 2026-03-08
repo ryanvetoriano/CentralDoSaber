@@ -223,6 +223,12 @@ Algumas regras implementadas no domínio:
 
 ---
 
+# 🗂️ Modelo Entidade Relacionamento
+
+![MER do Sistema](docs/images/Logical.png)
+
+---
+
 # 🚀 Autores
 
 Ryan Vetoriano - RM565667 - Github: https://github.com/ryanvetoriano
