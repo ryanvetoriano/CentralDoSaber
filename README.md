@@ -231,5 +231,5 @@ Algumas regras implementadas no domínio:
 
 # 🚀 Autores
 
-Ryan Vetoriano - RM565667 - Github: https://github.com/ryanvetoriano
-Felipe Furlanetto - RM562766 - Github: https://github.com/Felipe-Furlanetto0504
+* Ryan Vetoriano - RM565667 - Github: https://github.com/ryanvetoriano
+* Felipe Furlanetto - RM562766 - Github: https://github.com/Felipe-Furlanetto0504
