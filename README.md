@@ -225,7 +225,7 @@ Algumas regras implementadas no domínio:
 
 # 🗂️ Modelo Entidade Relacionamento
 
-![MER do Sistema](docs/images/Logical.png)
+![MER do Sistema](docs/images/mer.png)
 
 ---
 
