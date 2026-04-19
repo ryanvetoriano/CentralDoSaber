@@ -20,7 +20,7 @@ public class Conteudo : BaseEntity
     public int DataLancamento { get; private set; }
     
     // N..N
-    public List<Genero> Generos { get; private set; }
+    public List<ConteudoGenero> ConteudoGeneros { get; private set; } = new();
 
     public int? NumeroPaginas { get; private set; } 
     
@@ -36,7 +36,7 @@ public class Conteudo : BaseEntity
         string titulo,
         string descricao,
         int dataLancamento,
-        List<Genero> generos,
+        List<Guid> generosIds,
         int? numeroPaginas = null,
         int? numeroCapitulos = null,
         MediaType? tipo = MediaType.Outros)
@@ -49,14 +49,21 @@ public class Conteudo : BaseEntity
 
         DataLancamento = dataLancamento;
 
-        if (generos == null || !generos.Any())
+        if (generosIds == null || !generosIds.Any())
             throw new Exception("O conteúdo deve ter ao menos um gênero.");
-
-        Generos = generos;
 
         Tipo = tipo;
 
         ValidarEspecificacoes(numeroPaginas, numeroCapitulos);
+
+        foreach (var generoId in generosIds)
+        {
+            ConteudoGeneros.Add(new ConteudoGenero
+            {
+                ConteudoId = this.Id,
+                GeneroId = generoId
+            });
+        }
     }
 
     private void ValidarEspecificacoes(int? numeroPaginas, int? numeroCapitulos)

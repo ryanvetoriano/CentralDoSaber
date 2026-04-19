@@ -8,8 +8,9 @@ public class UserConfiguration : BaseEntity
 
     public bool NotificacoesAtivas { get; private set; }
 
-    //1..1
     public Guid UserId { get; private set; }
+
+    private UserConfiguration() { }
 
     public UserConfiguration(string tema, bool notificacoesAtivas, Guid userId)
     {

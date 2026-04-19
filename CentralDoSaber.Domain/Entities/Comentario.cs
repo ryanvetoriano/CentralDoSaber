@@ -7,8 +7,10 @@ public class Comentario : BaseEntity
     public string Texto { get; private set; }
 
     public Guid UserId { get; private set; }
-
     public Guid ConteudoId { get; private set; }
+
+    public User User { get; private set; }
+    public Conteudo Conteudo { get; private set; }
 
     public Comentario(string texto, Guid userId, Guid conteudoId)
     {

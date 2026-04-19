@@ -5,8 +5,10 @@ namespace CentralDoSaber.Domain.Entities;
 public class Avaliacao : BaseEntity
 {
     public Guid ConteudoId { get; private set; }
-
     public Guid UserId { get; private set; }
+
+    public Conteudo Conteudo { get; private set; }
+    public User User { get; private set; }
 
     public int Nota { get; private set; }
 

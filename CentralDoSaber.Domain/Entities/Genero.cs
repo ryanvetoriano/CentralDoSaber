@@ -8,8 +8,7 @@ public class Genero : BaseEntity
 
     public string Descricao { get; private set; }
 
-    public IReadOnlyCollection<Conteudo> Conteudos { get; private set; } = new List<Conteudo>();
-
+    public List<ConteudoGenero> ConteudoGeneros { get; private set; } = new();
     public Genero(string nome, string descricao)
     {
         if (string.IsNullOrWhiteSpace(nome))
