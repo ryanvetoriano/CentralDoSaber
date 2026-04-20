@@ -1,4 +1,4 @@
-﻿using CentralDoSaber.Domain.Commom;
+﻿using CentralDoSaber.Domain.Common;
 
 namespace CentralDoSaber.Domain.Entities;
 

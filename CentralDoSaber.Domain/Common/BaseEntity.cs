@@ -1,4 +1,4 @@
-﻿namespace CentralDoSaber.Domain.Commom;
+﻿namespace CentralDoSaber.Domain.Common;
 
 public abstract class BaseEntity
 {
