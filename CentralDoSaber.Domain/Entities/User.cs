@@ -5,18 +5,20 @@ namespace CentralDoSaber.Domain.Entities;
 public class User : BaseEntity
 {
     public string Nome { get; private set; }
-
     public string Email { get; private set; }
 
-    private DateOnly DataNascimento { get; set; }
-
+    public DateOnly DataNascimento { get; private set; }
     public string Password { get; private set; }
 
-    //1..1
+    // 1..1
     public UserConfiguration Configuration { get; set; }
 
-    //1..N
+    // 1..N
     public List<Avaliacao> Avaliacoes { get; set; } = new();
+
+    public List<Comentario> Comentarios { get; set; } = new();
+
+    private User() { }
 
     public User(string nome, string email, DateOnly dataNascimento, string rawPassword)
     {

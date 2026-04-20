@@ -21,7 +21,7 @@ public class Program
 
         builder.Services.AddDbContext<CentralDoSaberContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("Oracle");
+            var connectionString = builder.Configuration.GetConnectionString("CentralDoSaberContextOracle");
 
             options.UseOracle(connectionString);
         });

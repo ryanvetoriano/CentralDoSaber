@@ -16,9 +16,10 @@ public class ComentarioConfiguration : IEntityTypeConfiguration<Comentario>
             .HasMaxLength(500)
             .IsRequired();
 
-        builder.HasOne<User>()
-            .WithMany()
-            .HasForeignKey(c => c.UserId);
+        builder.HasOne(c => c.User)
+            .WithMany(u => u.Comentarios)
+            .HasForeignKey(c => c.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(c => c.Conteudo)
             .WithMany(c => c.Comentarios)

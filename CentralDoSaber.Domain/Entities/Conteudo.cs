@@ -18,12 +18,11 @@ public class Conteudo : BaseEntity
     public MediaType? Tipo { get; private set; }
 
     public int DataLancamento { get; private set; }
-    
+
     // N..N
     public List<ConteudoGenero> ConteudoGeneros { get; private set; } = new();
 
     public int? NumeroPaginas { get; private set; } 
-    
     public int? NumeroCapitulos { get; private set; }
 
     // 1..N
@@ -32,11 +31,12 @@ public class Conteudo : BaseEntity
     // 1..N
     public List<Comentario> Comentarios { get; private set; } = new();
 
+    private Conteudo() { }
+
     public Conteudo(
         string titulo,
         string descricao,
         int dataLancamento,
-        List<Guid> generosIds,
         int? numeroPaginas = null,
         int? numeroCapitulos = null,
         MediaType? tipo = MediaType.Outros)
@@ -49,12 +49,18 @@ public class Conteudo : BaseEntity
 
         DataLancamento = dataLancamento;
 
-        if (generosIds == null || !generosIds.Any())
-            throw new Exception("O conteúdo deve ter ao menos um gênero.");
-
         Tipo = tipo;
 
         ValidarEspecificacoes(numeroPaginas, numeroCapitulos);
+
+        NumeroPaginas = numeroPaginas;
+        NumeroCapitulos = numeroCapitulos;
+    }
+
+    public void AdicionarGeneros(List<Guid> generosIds)
+    {
+        if (generosIds == null || !generosIds.Any())
+            throw new Exception("O conteúdo deve ter ao menos um gênero.");
 
         foreach (var generoId in generosIds)
         {
@@ -83,9 +89,6 @@ public class Conteudo : BaseEntity
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
-        NumeroPaginas = numeroPaginas;
-        NumeroCapitulos = numeroCapitulos;
     }
 
     private void ValidarPaginasECapitulos(int? numeroPaginas, int? numeroCapitulos, string tipo)
