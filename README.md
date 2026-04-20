@@ -31,10 +31,18 @@ CentralDoSaber
 │   └── Common
 │
 ├── Application
+│   ├── DTO
+│   ├── Interfaces
+│   └── Services
 │
 ├── Infrastructure
+│   └── Persistence
+│       ├── Configurations
+│       ├── Migrations
+│       └── Repositories
 │
 └── API
+    └── Controllers
 ```
 
 ---
@@ -203,8 +211,10 @@ Relacionamento:
 # 🛠️ Tecnologias Utilizadas
 
 * C#
-* .NET
+* .NET 10
+* Entity Framework Core
 * Domain Driven Design (DDD)
+* Clean Architecture
 * Oracle SQL Developer Data Modeler
 * Git
 * GitHub
@@ -233,3 +243,65 @@ Algumas regras implementadas no domínio:
 
 * Ryan Vetoriano - RM565667 - Github: https://github.com/ryanvetoriano
 * Felipe Furlanetto - RM562766 - Github: https://github.com/Felipe-Furlanetto0504
+
+---
+
+# 🗄️ CP2 — Persistência com EF Core
+
+## 🗃️ SGBD utilizado
+**Oracle** (`oracle.fiap.com.br`) via provider `Oracle.EntityFrameworkCore`
+
+## 🧱 O que foi implementado
+
+* `DbContext` (`CentralDoSaberContext`) na camada **Infrastructure** com todas as 9 entidades
+* Mapeamento completo via **Fluent API** (`IEntityTypeConfiguration<T>`) para cada entidade
+* Relacionamentos N:N (`ConteudoGenero`) com chave composta
+* Campos `bool` mapeados como `NUMBER(1)` para compatibilidade com Oracle
+* **Migration única** (`InitialCreate`) aplicada com sucesso
+* Repositórios com interfaces na **Application** e implementações na **Infrastructure**:
+    * `IUserRepository` / `UserRepository`
+    * `IConteudoRepository` / `ConteudoRepository`
+    * `IAutorRepository` / `AutorRepository`
+    * `IGeneroRepository` / `GeneroRepository`
+* Injeção de dependência registrada no `Program.cs`
+* Controller `UsersController` com endpoints CRUD completos
+
+## ⚙️ Como executar
+
+### Pré-requisitos
+- .NET 10 SDK instalado
+- Acesso à rede da FIAP (ou VPN ativa)
+
+### 1. Configurar credenciais
+Crie ou edite o arquivo `CentralDoSaber.API/appsettings.Development.json` com suas credenciais:
+```json
+{
+  "ConnectionStrings": {
+    "CentralDoSaberContextOracle": "Data Source=oracle.fiap.com.br:1521/orcl;User ID=SEU_RM;Password=SUA_SENHA;"
+  }
+}
+```
+
+### 2. Aplicar as migrations e criar o banco
+```bash
+dotnet ef database update --project CentralDoSaber.Infrastructure --startup-project CentralDoSaber.API
+```
+
+### 3. Rodar a API
+```bash
+cd CentralDoSaber.API
+dotnet run
+```
+
+A documentação interativa estará disponível em:
+```
+http://localhost:5058/swagger
+```
+
+## 📊 Evidência do esquema físico
+
+### Swagger
+![Swagger](docs/images/swagger.png)
+
+### Esquema no banco Oracle
+![Schema Oracle](docs/images/schema.png)

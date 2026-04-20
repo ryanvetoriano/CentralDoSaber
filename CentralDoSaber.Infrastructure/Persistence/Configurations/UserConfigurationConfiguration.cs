@@ -17,6 +17,14 @@ public class UserConfigurationConfiguration : IEntityTypeConfiguration<UserConfi
 
         builder.HasIndex(u => u.UserId)
             .IsUnique();
+        
+        builder.Property(u => u.NotificacoesAtivas)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
+
+        builder.Property(u => u.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
 
         builder.HasOne<User>()
             .WithOne(u => u.Configuration)

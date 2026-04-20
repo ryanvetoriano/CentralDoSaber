@@ -12,7 +12,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace CentralDoSaber.Infrastructure.Migrations
 {
     [DbContext(typeof(CentralDoSaberContext))]
-    [Migration("20260420002043_InitialCreate")]
+    [Migration("20260420013722_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -42,7 +42,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("NVARCHAR2(10)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -67,7 +67,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<int>("Nota")
                         .HasColumnType("NUMBER(10)");
@@ -98,7 +98,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("Texto")
                         .IsRequired()
@@ -138,7 +138,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("NVARCHAR2(500)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<Guid>("EditoraId")
                         .HasColumnType("RAW(16)");
@@ -191,7 +191,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -221,7 +221,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -247,7 +247,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("NVARCHAR2(10)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -279,10 +279,10 @@ namespace CentralDoSaber.Infrastructure.Migrations
                         .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<bool>("NotificacoesAtivas")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("NUMBER(1)");
 
                     b.Property<string>("Tema")
                         .IsRequired()

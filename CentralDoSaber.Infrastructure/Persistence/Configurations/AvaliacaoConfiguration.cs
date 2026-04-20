@@ -15,6 +15,10 @@ public class AvaliacaoConfiguration : IEntityTypeConfiguration<Avaliacao>
         builder.Property(a => a.Nota)
             .IsRequired();
 
+        builder.Property(a => a.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
+
         builder.HasOne(a => a.User)
             .WithMany(u => u.Avaliacoes)
             .HasForeignKey(a => a.UserId);

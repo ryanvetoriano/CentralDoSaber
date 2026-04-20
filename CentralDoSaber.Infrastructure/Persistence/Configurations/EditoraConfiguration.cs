@@ -19,6 +19,10 @@ public class EditoraConfiguration : IEntityTypeConfiguration<Editora>
         builder.Property(e => e.Pais)
             .IsRequired();
 
+        builder.Property(e => e.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
+
         builder.HasMany(e => e.Conteudos)
             .WithOne(c => c.Editora)
             .HasForeignKey(c => c.EditoraId);

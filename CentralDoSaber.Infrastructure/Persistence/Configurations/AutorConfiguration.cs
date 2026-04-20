@@ -19,6 +19,10 @@ public class AutorConfiguration : IEntityTypeConfiguration<Autor>
         builder.Property(a => a.Biografia)
             .IsRequired();
 
+        builder.Property(a => a.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
+
         builder.HasMany(a => a.Conteudos)
             .WithOne(c => c.Autor)
             .HasForeignKey(c => c.AutorId);

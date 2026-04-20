@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CentralDoSaber.Application\CentralDoSaber.Application.csproj" />
       <ProjectReference Include="..\CentralDoSaber.Domain\CentralDoSaber.Domain.csproj" />
     </ItemGroup>
 

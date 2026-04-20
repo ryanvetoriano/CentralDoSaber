@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using CentralDoSaber.Application.Interfaces;
 using CentralDoSaber.Application.Services;
 using CentralDoSaber.Infrastructure.Persistence;
+using CentralDoSaber.Infrastructure.Persistence.Repositories;
 
 namespace CentralDoSaber.API;
 
@@ -15,22 +16,34 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Controllers
         builder.Services.AddControllers();
 
+        // Services (Application)
         builder.Services.AddScoped<IUserService, UserService>();
 
+        // Repositories (Infrastructure)
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IConteudoRepository, ConteudoRepository>();   
+        builder.Services.AddScoped<IAutorRepository, AutorRepository>();           
+        builder.Services.AddScoped<IGeneroRepository, GeneroRepository>(); 
+
+        // DbContext (EF Core + Oracle)
         builder.Services.AddDbContext<CentralDoSaberContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("CentralDoSaberContextOracle");
+            var connectionString =
+                builder.Configuration.GetConnectionString("CentralDoSaberContextOracle");
 
             options.UseOracle(connectionString);
         });
 
+        // Swagger
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
 
+        // Pipeline HTTP
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -38,7 +51,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
         app.UseAuthorization();
+
         app.MapControllers();
 
         app.Run();

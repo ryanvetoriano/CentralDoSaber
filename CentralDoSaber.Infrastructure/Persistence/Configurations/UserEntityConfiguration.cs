@@ -27,5 +27,9 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(u => u.Avaliacoes)
             .WithOne(a => a.User)
             .HasForeignKey(a => a.UserId);
+        
+        builder.Property(u => u.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
     }
 }

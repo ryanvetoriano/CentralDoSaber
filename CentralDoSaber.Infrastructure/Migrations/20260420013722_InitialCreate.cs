@@ -19,7 +19,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     Nome = table.Column<string>(type: "NVARCHAR2(150)", maxLength: 150, nullable: false),
                     Biografia = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     DataNascimento = table.Column<string>(type: "NVARCHAR2(10)", nullable: true),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -34,7 +34,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     Nome = table.Column<string>(type: "NVARCHAR2(150)", maxLength: 150, nullable: false),
                     Pais = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -49,7 +49,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     Nome = table.Column<string>(type: "NVARCHAR2(100)", maxLength: 100, nullable: false),
                     Descricao = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -66,7 +66,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     Email = table.Column<string>(type: "NVARCHAR2(450)", nullable: false),
                     DataNascimento = table.Column<string>(type: "NVARCHAR2(10)", nullable: false),
                     Password = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -87,7 +87,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     DataLancamento = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     NumeroPaginas = table.Column<int>(type: "NUMBER(10)", nullable: true),
                     NumeroCapitulos = table.Column<int>(type: "NUMBER(10)", nullable: true),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -113,9 +113,9 @@ namespace CentralDoSaber.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     Tema = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    NotificacoesAtivas = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    NotificacoesAtivas = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     UserId = table.Column<Guid>(type: "RAW(16)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -137,7 +137,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     ConteudoId = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     UserId = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     Nota = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
@@ -165,7 +165,7 @@ namespace CentralDoSaber.Infrastructure.Migrations
                     Texto = table.Column<string>(type: "NVARCHAR2(500)", maxLength: 500, nullable: false),
                     UserId = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     ConteudoId = table.Column<Guid>(type: "RAW(16)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    Disponivel = table.Column<bool>(type: "NUMBER(1)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>

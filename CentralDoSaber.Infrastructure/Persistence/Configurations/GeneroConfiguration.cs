@@ -18,5 +18,9 @@ public class GeneroConfiguration : IEntityTypeConfiguration<Genero>
 
         builder.Property(g => g.Descricao)
             .IsRequired();
+
+        builder.Property(g => g.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
     }
 }

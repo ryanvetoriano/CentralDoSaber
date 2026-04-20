@@ -1,53 +1,57 @@
 ﻿using CentralDoSaber.Application.DTO;
 using CentralDoSaber.Application.Interfaces;
-using CentralDoSaber.Domain.Entities;
 
 namespace CentralDoSaber.Application.Services;
 
 public class UserService : IUserService
 {
-    private readonly List<User> _usuarios = new(); // simulação
+    private readonly IUserRepository _repository;
 
-    public UserResponse CriarUsuario(CreateUserRequest request)
+    public UserService(IUserRepository repository)
     {
-        if (EmailExiste(request.Email))
+        _repository = repository;
+    }
+
+    public async Task<UserResponse> CriarUsuario(CreateUserRequest request)
+    {
+        if (await _repository.EmailExistsAsync(request.Email))
             throw new InvalidOperationException("E-mail já está em uso.");
 
         var user = request.ToDomain();
 
-        _usuarios.Add(user);
+        await _repository.AddAsync(user);
+        await _repository.SaveChangesAsync();
 
         return UserResponse.FromDomain(user);
     }
 
-    public UserResponse? BuscarPorId(Guid id)
+    public async Task<UserResponse?> BuscarPorId(Guid id)
     {
-        var user = _usuarios.FirstOrDefault(u => u.Id == id);
+        var user = await _repository.GetByIdAsync(id);
         return user is null ? null : UserResponse.FromDomain(user);
     }
 
-    public UserResponse? BuscarPorEmail(string email)
+    public async Task<UserResponse?> BuscarPorEmail(string email)
     {
-        var user = _usuarios.FirstOrDefault(u => u.Email == email);
+        var user = await _repository.GetByEmailAsync(email);
         return user is null ? null : UserResponse.FromDomain(user);
     }
 
-    public IReadOnlyList<UserResponse> ListarTodos()
+    public async Task<IReadOnlyList<UserResponse>> ListarTodos()
     {
-        return _usuarios
-            .Where(u => u.Disponivel)
-            .Select(UserResponse.FromDomain)
-            .ToList();
+        var users = await _repository.GetAllAsync();
+        return users.Select(UserResponse.FromDomain).ToList();
     }
 
-    public UserResponse AtualizarUsuario(Guid id, UpdateUserRequest request)
+    public async Task<UserResponse> AtualizarUsuario(Guid id, UpdateUserRequest request)
     {
-        var user = _usuarios.FirstOrDefault(u => u.Id == id);
+        var user = await _repository.GetByIdAsync(id);
 
         if (user == null)
             throw new InvalidOperationException("Usuário não encontrado.");
 
-        if (request.Email is not null && EmailExiste(request.Email, id))
+        if (request.Email is not null &&
+            await _repository.EmailExistsAsync(request.Email, id))
             throw new InvalidOperationException("E-mail já está em uso.");
 
         if (request.Nome is not null)
@@ -62,31 +66,36 @@ public class UserService : IUserService
         if (request.NovaSenha is not null)
             user.AlterarSenha(request.NovaSenha);
 
+        await _repository.UpdateAsync(user);
+        await _repository.SaveChangesAsync();
+
         return UserResponse.FromDomain(user);
     }
 
-    public bool DesativarUsuario(Guid id)
+    public async Task<bool> DesativarUsuario(Guid id)
     {
-        var user = _usuarios.FirstOrDefault(u => u.Id == id);
+        var user = await _repository.GetByIdAsync(id);
         if (user == null) return false;
 
         user.Deactivate();
+        await _repository.SaveChangesAsync();
+
         return true;
     }
 
-    public bool AtivarUsuario(Guid id)
+    public async Task<bool> AtivarUsuario(Guid id)
     {
-        var user = _usuarios.FirstOrDefault(u => u.Id == id);
+        var user = await _repository.GetByIdAsync(id);
         if (user == null) return false;
 
         user.Activate();
+        await _repository.SaveChangesAsync();
+
         return true;
     }
 
-    public bool EmailExiste(string email, Guid? excluirUserId = null)
+    public async Task<bool> EmailExiste(string email, Guid? excluirUserId = null)
     {
-        return _usuarios.Any(u =>
-            u.Email == email &&
-            (!excluirUserId.HasValue || u.Id != excluirUserId));
+        return await _repository.EmailExistsAsync(email, excluirUserId);
     }
 }

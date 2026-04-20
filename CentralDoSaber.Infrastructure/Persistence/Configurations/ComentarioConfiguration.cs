@@ -16,6 +16,10 @@ public class ComentarioConfiguration : IEntityTypeConfiguration<Comentario>
             .HasMaxLength(500)
             .IsRequired();
 
+        builder.Property(c => c.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
+
         builder.HasOne(c => c.User)
             .WithMany(u => u.Comentarios)
             .HasForeignKey(c => c.UserId)

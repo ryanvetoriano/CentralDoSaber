@@ -26,6 +26,10 @@ public class ConteudoConfiguration : IEntityTypeConfiguration<Conteudo>
         builder.Property(c => c.DataLancamento)
             .IsRequired();
 
+        builder.Property(c => c.Disponivel)
+            .HasColumnType("NUMBER(1)")
+            .IsRequired();
+
         builder.HasOne(c => c.Autor)
             .WithMany(a => a.Conteudos)
             .HasForeignKey(c => c.AutorId);
@@ -34,7 +38,6 @@ public class ConteudoConfiguration : IEntityTypeConfiguration<Conteudo>
             .WithMany(e => e.Conteudos)
             .HasForeignKey(c => c.EditoraId);
 
-        
         builder.HasMany(c => c.Avaliacoes)
             .WithOne(a => a.Conteudo)
             .HasForeignKey(a => a.ConteudoId);
@@ -42,6 +45,5 @@ public class ConteudoConfiguration : IEntityTypeConfiguration<Conteudo>
         builder.HasMany(c => c.Comentarios)
             .WithOne(c => c.Conteudo)
             .HasForeignKey(c => c.ConteudoId);
-
     }
 }
