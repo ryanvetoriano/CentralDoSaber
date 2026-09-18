@@ -1,4 +1,5 @@
 ﻿using CentralDoSaber.Domain.Common;
+using CentralDoSaber.Domain.Exceptions;
 
 namespace CentralDoSaber.Domain.Entities;
 
@@ -20,7 +21,7 @@ public class Editora : BaseEntity
     public void AtualizarNome(string nome)
     {
         if (string.IsNullOrWhiteSpace(nome))
-            throw new Exception("Nome da editora não pode ser vazio.");
+            throw new DomainException("Nome da editora não pode ser vazio.");
 
         Nome = nome;
     }

@@ -1,4 +1,5 @@
 ﻿using CentralDoSaber.Domain.Common;
+using CentralDoSaber.Domain.Exceptions;
 using CentralDoSaber.Domain.Enum;
 
 namespace CentralDoSaber.Domain.Entities;
@@ -45,7 +46,7 @@ public class Conteudo : BaseEntity
         AtualizarDescricao(descricao);
 
         if (dataLancamento < 1888 || dataLancamento > DateTime.Now.Year + 5)
-            throw new Exception("Ano de lançamento inválido.");
+            throw new DomainException("Ano de lançamento inválido.");
 
         DataLancamento = dataLancamento;
 
@@ -60,7 +61,7 @@ public class Conteudo : BaseEntity
     public void AdicionarGeneros(List<Guid> generosIds)
     {
         if (generosIds == null || !generosIds.Any())
-            throw new Exception("O conteúdo deve ter ao menos um gênero.");
+            throw new DomainException("O conteúdo deve ter ao menos um gênero.");
 
         foreach (var generoId in generosIds)
         {
@@ -94,16 +95,16 @@ public class Conteudo : BaseEntity
     private void ValidarPaginasECapitulos(int? numeroPaginas, int? numeroCapitulos, string tipo)
     {
         if (!numeroPaginas.HasValue || numeroPaginas <= 0)
-            throw new Exception($"{tipo}s devem ter uma quantidade de páginas maior que zero.");
+            throw new DomainException($"{tipo}s devem ter uma quantidade de páginas maior que zero.");
 
         if (!numeroCapitulos.HasValue || numeroCapitulos <= 0)
-            throw new Exception($"{tipo}s devem ter ao menos um capítulo.");
+            throw new DomainException($"{tipo}s devem ter ao menos um capítulo.");
     }
 
     public void AtualizarTitulo(string titulo)
     {
         if (string.IsNullOrWhiteSpace(titulo))
-            throw new Exception("O título não pode ser vazio.");
+            throw new DomainException("O título não pode ser vazio.");
 
         Titulo = titulo.Trim();
     }
@@ -111,7 +112,7 @@ public class Conteudo : BaseEntity
     public void AtualizarDescricao(string descricao)
     {
         if (string.IsNullOrWhiteSpace(descricao) || descricao.Length < 10)
-            throw new Exception("A descrição deve ter pelo menos 10 caracteres.");
+            throw new DomainException("A descrição deve ter pelo menos 10 caracteres.");
 
         Descricao = descricao;
     }

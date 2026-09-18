@@ -1,4 +1,5 @@
 ﻿using CentralDoSaber.Domain.Common;
+using CentralDoSaber.Domain.Exceptions;
 
 namespace CentralDoSaber.Domain.Entities;
 
@@ -22,7 +23,7 @@ public class UserConfiguration : BaseEntity
     public void AtualizarTema(string novoTema)
     {
         if (string.IsNullOrWhiteSpace(novoTema))
-            throw new Exception("Tema inválido.");
+            throw new DomainException("Tema inválido.");
 
         Tema = novoTema;
     }

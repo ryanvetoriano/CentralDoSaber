@@ -3,6 +3,9 @@
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- CS1591: nem todo membro público precisa de XML doc -->
+        <NoWarn>$(NoWarn);1591</NoWarn>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
@@ -13,6 +16,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="10.0.6" />
         <PackageReference Include="Oracle.EntityFrameworkCore" Version="10.23.26200" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
     </ItemGroup>

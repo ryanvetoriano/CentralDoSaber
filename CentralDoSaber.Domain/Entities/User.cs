@@ -1,4 +1,5 @@
 ﻿using CentralDoSaber.Domain.Common;
+using CentralDoSaber.Domain.Exceptions;
 
 namespace CentralDoSaber.Domain.Entities;
 
@@ -31,7 +32,7 @@ public class User : BaseEntity
     public void AtualizarNome(string novoNome)
     {
         if (string.IsNullOrWhiteSpace(novoNome))
-            throw new Exception("Nome não pode ser vazio.");
+            throw new DomainException("Nome não pode ser vazio.");
 
         Nome = novoNome;
     }
@@ -39,7 +40,7 @@ public class User : BaseEntity
     public void AtualizarEmail(string novoEmail)
     {
         if (string.IsNullOrWhiteSpace(novoEmail) || !novoEmail.Contains("@"))
-            throw new Exception("E-mail inválido.");
+            throw new DomainException("E-mail inválido.");
 
         Email = novoEmail;
     }
@@ -49,7 +50,7 @@ public class User : BaseEntity
         var idade = CalcularIdade(novaData);
 
         if (idade < 13)
-            throw new Exception("Usuário deve ter pelo menos 13 anos.");
+            throw new DomainException("Usuário deve ter pelo menos 13 anos.");
 
         DataNascimento = novaData;
     }
@@ -57,7 +58,7 @@ public class User : BaseEntity
     public void AlterarSenha(string novaSenha)
     {
         if (string.IsNullOrWhiteSpace(novaSenha) || novaSenha.Length < 8)
-            throw new Exception("A senha deve ter pelo menos 8 caracteres.");
+            throw new DomainException("A senha deve ter pelo menos 8 caracteres.");
 
         Password = novaSenha;
     }

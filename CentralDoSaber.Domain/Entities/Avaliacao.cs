@@ -1,4 +1,5 @@
 ﻿using CentralDoSaber.Domain.Common;
+using CentralDoSaber.Domain.Exceptions;
 
 namespace CentralDoSaber.Domain.Entities;
 
@@ -22,7 +23,7 @@ public class Avaliacao : BaseEntity
     public void AtualizarNota(int nota)
     {
         if (nota is < 1 or > 5)
-            throw new Exception("A nota deve estar entre 1 e 5.");
+            throw new DomainException("A nota deve estar entre 1 e 5.");
 
         Nota = nota;
     }

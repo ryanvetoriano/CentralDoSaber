@@ -1,4 +1,5 @@
-﻿using CentralDoSaber.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
+using CentralDoSaber.Domain.Entities;
 
 namespace CentralDoSaber.Application.DTO;
 
@@ -6,10 +7,10 @@ namespace CentralDoSaber.Application.DTO;
 /// DTO para criação de usuário.
 /// </summary>
 public record CreateUserRequest(
-    string Nome,
-    string Email,
-    string Senha,
-    DateOnly DataNascimento
+    [Required] string Nome,
+    [Required, EmailAddress] string Email,
+    [Required, MinLength(8)] string Senha,
+    [Required] DateOnly DataNascimento
 )
 {
     public User ToDomain()

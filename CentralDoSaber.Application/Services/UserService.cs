@@ -1,5 +1,6 @@
 ﻿using CentralDoSaber.Application.DTO;
 using CentralDoSaber.Application.Interfaces;
+using CentralDoSaber.Domain.Exceptions;
 
 namespace CentralDoSaber.Application.Services;
 
@@ -15,7 +16,7 @@ public class UserService : IUserService
     public async Task<UserResponse> CriarUsuario(CreateUserRequest request)
     {
         if (await _repository.EmailExistsAsync(request.Email))
-            throw new InvalidOperationException("E-mail já está em uso.");
+            throw new ConflictException("E-mail já está em uso.");
 
         var user = request.ToDomain();
 
@@ -48,11 +49,11 @@ public class UserService : IUserService
         var user = await _repository.GetByIdAsync(id);
 
         if (user == null)
-            throw new InvalidOperationException("Usuário não encontrado.");
+            throw new NotFoundException($"Usuário {id} não encontrado.");
 
         if (request.Email is not null &&
             await _repository.EmailExistsAsync(request.Email, id))
-            throw new InvalidOperationException("E-mail já está em uso.");
+            throw new ConflictException("E-mail já está em uso.");
 
         if (request.Nome is not null)
             user.AtualizarNome(request.Nome);

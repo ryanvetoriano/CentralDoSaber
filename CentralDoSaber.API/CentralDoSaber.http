@@ -1,6 +1,28 @@
 @CentralDoSaber_HostAddress = http://localhost:5058
 
-GET {{CentralDoSaber_HostAddress}}/weatherforecast/
+### Health check (self + banco + site FIAP)
+GET {{CentralDoSaber_HostAddress}}/health
 Accept: application/json
 
-###
+### Lista usuários
+GET {{CentralDoSaber_HostAddress}}/api/users
+Accept: application/json
+
+### Cria usuário (gera logs com traceId)
+POST {{CentralDoSaber_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "nome": "Maria Silva",
+  "email": "maria@exemplo.com",
+  "senha": "senhaSegura123",
+  "dataNascimento": "2000-05-10"
+}
+
+### Atualiza usuário inexistente (404 via GlobalExceptionHandler)
+PUT {{CentralDoSaber_HostAddress}}/api/users/00000000-0000-0000-0000-000000000001
+Content-Type: application/json
+
+{
+  "nome": "Novo Nome"
+}

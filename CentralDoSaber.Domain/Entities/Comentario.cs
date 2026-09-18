@@ -1,4 +1,5 @@
 ﻿using CentralDoSaber.Domain.Common;
+using CentralDoSaber.Domain.Exceptions;
 
 namespace CentralDoSaber.Domain.Entities;
 
@@ -22,10 +23,10 @@ public class Comentario : BaseEntity
     public void AtualizarTexto(string texto)
     {
         if (string.IsNullOrWhiteSpace(texto))
-            throw new Exception("Comentário não pode ser vazio.");
+            throw new DomainException("Comentário não pode ser vazio.");
 
         if (texto.Length < 3)
-            throw new Exception("Comentário muito curto.");
+            throw new DomainException("Comentário muito curto.");
 
         Texto = texto;
     }
