@@ -421,7 +421,9 @@ Registrados via extensão `AddCentralDoSaberHealthChecks` ([HealthChecksExtensio
 * **Banco inacessível → 503**: evidência real em [docs/evidencias/health-unhealthy-banco-inacessivel.json](docs/evidencias/health-unhealthy-banco-inacessivel.json), obtida subindo a API só com a connection string placeholder do `appsettings.json` (sem `appsettings.Development.json`), o que gera `ORA-01017` no Oracle.
 
   ![/health 503](docs/images/health-unhealthy-503-terminal.png)
-* **Tudo ok → 200**: com as credenciais reais em `appsettings.Development.json`, `/health` retorna os três checks `Healthy` e HTTP 200.
+* **Tudo ok → 200**: com as credenciais reais em `appsettings.Development.json`, `/health` retorna os três checks `Healthy` e HTTP 200. Evidência em [docs/evidencias/health-healthy.json](docs/evidencias/health-healthy.json).
+
+  ![/health 200](docs/images/health-healthy-200-terminal.png)
 
 ## 📝 Observabilidade — logs com `traceId`
 

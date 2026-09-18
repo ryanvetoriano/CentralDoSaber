@@ -1,0 +1,39 @@
+{
+  "status": "Healthy",
+  "totalDurationMs": 134.9311,
+  "timestamp": "2026-09-18T17:39:03.4575924+00:00",
+  "traceId": "0HNOLLEOGOH7V:00000001",
+  "checks": [
+    {
+      "name": "self",
+      "status": "Healthy",
+      "durationMs": 0.0075,
+      "description": "API em execução.",
+      "tags": [
+        "live"
+      ]
+    },
+    {
+      "name": "oracle-db",
+      "status": "Healthy",
+      "durationMs": 109.4479,
+      "tags": [
+        "db",
+        "oracle"
+      ]
+    },
+    {
+      "name": "fiap-site",
+      "status": "Healthy",
+      "durationMs": 134.7594,
+      "description": "www.fiap.com.br respondeu 200.",
+      "tags": [
+        "external"
+      ],
+      "data": {
+        "url": "https://www.fiap.com.br/",
+        "statusCode": 200
+      }
+    }
+  ]
+}
