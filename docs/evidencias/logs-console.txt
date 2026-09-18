@@ -1,0 +1,31 @@
+# Trecho do console da API (Development) — 2026-09-18
+# Banco inacessível de propósito (connection string placeholder do appsettings.json -> ORA-01017).
+# Escopos (SpanId/ConnectionId/RequestPath) e stack traces foram omitidos para leitura.
+# Observe que o TraceId do log é o mesmo devolvido no ProblemDetails (campo "traceId").
+
+## GET /health -> check do banco falha, relatório 503
+2026-09-18 14:18:41.341 fail: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[103] Health check oracle-db with status Unhealthy completed after 1260.1447ms with message '(null)'
+
+## POST /api/autores com data de nascimento futura -> DomainException -> 400
+2026-09-18 14:18:42.007 info: CentralDoSaber.API.Controllers.AutoresController[0] Criando autor Autor. TraceId: 0HNOLL3G6T638:00000001
+2026-09-18 14:18:42.034 fail: CentralDoSaber.API.Handlers.GlobalExceptionHandler[0] Exceção tratada DomainException em POST /api/autores -> 400. TraceId: 0HNOLL3G6T638:00000001
+CentralDoSaber.Domain.Exceptions.DomainException: Data de nascimento do autor não pode estar no futuro.
+   at CentralDoSaber.Domain.Entities.Autor.DefinirDataNascimento(...)  [stack trace omitido]
+
+## PUT /api/users/{id} com banco fora -> OracleException -> 500 (detalhe só no log)
+2026-09-18 14:18:42.133 info: CentralDoSaber.API.Controllers.UsersController[0] Atualizando usuário 00000000-0000-0000-0000-000000000001. TraceId: 0HNOLL3G6T639:00000001
+2026-09-18 14:18:43.586 fail: Microsoft.EntityFrameworkCore.Database.Connection[20004] An error occurred using the connection to database '' on server 'oracle.fiap.com.br:1521/orcl'.
+2026-09-18 14:18:43.629 fail: CentralDoSaber.API.Handlers.GlobalExceptionHandler[0] Exceção tratada OracleException em PUT /api/users/00000000-0000-0000-0000-000000000001 -> 500. TraceId: 0HNOLL3G6T639:00000001
+Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-01017: invalid username/password; logon denied  [stack trace omitido]
+
+## Respostas HTTP correspondentes
+# POST /api/autores (Development)
+{"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"Regra de negócio violada","status":400,"detail":"Data de nascimento do autor não pode estar no futuro.","instance":"POST /api/autores","traceId":"0HNOLL3G6T638:00000001","exception":"CentralDoSaber.Domain.Exceptions.DomainException","stackTrace":"..."}
+
+# PUT /api/users/{id} (Production: sem stack trace, sem detalhe do banco)
+{"type":"https://tools.ietf.org/html/rfc9110#section-15.6.1","title":"Erro interno do servidor","status":500,"detail":"Ocorreu um erro inesperado. Informe o traceId ao suporte.","instance":"PUT /api/users/00000000-0000-0000-0000-000000000001","traceId":"0HNOLL3N7HO9U:00000001"}
+
+# POST /api/generos com payload vazio (validação automática do [ApiController])
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json; charset=utf-8
+{"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"Nome":["The Nome field is required."],"Descricao":["The Descricao field is required."]},"traceId":"0HNOLL3G6T637:00000001"}
